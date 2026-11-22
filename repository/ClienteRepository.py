@@ -79,3 +79,17 @@ class ClienteRepository:
             connection.close()
             
             
+    def set_ativo(self, cliente_id, ativo):
+        connection = get_connection()
+        
+        try:
+            cursor = connection.execute(
+                "UPDATE cliente SET ativo = ? WHERE id = ?",
+                (int(ativo), cliente_id),
+            )
+            connection.commit()
+            return cursor.rowcount > 0
+        finally:
+            connection.close()
+            
+            
