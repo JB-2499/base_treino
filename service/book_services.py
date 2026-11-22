@@ -45,8 +45,19 @@ class BookServices:
         book.synopsis = synopsis
         return self.repository.update(book)
    
-     def delete(self, book_id):
+    def delete(self, book_id):
         if self.repository.find_by_id(book_id) is None:
             return False
         return self.repository.delete(book_id)   
     
+    def _change_availability(self, book_id, available):
+        book = self.repository.find_by_id(book_id)
+        if book is None:
+            return None
+
+        self.repository.set_available(book_id, available)
+        book.available = available
+        return book
+
+    def make_available(self, book_id):
+        return self._change_availability(book_id, True)

@@ -104,3 +104,14 @@ class BookUI:
             print("Livro excluído com sucesso.")
         else:
             print("Exclusão cancelada.")
+            
+    def make_available(self):
+        book_id = self._read_id()
+        if book_id is None:
+            return
+
+        book = self.services.make_available(book_id)
+        if book is None:
+            print("Não foi possível localizar o livro.")
+        else:
+            print(f"Livro '{book.title}' agora está: {book.status}.")

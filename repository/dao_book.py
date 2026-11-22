@@ -60,3 +60,14 @@ class DAOBook:
             return cursor.rowcount > 0
         finally:
             connection.close()            
+    def set_available(self, book_id, available):
+        connection = get_connection()
+        try:
+            cursor = connection.execute(
+                "UPDATE books SET available = ? WHERE id = ?",
+                (int(available), book_id),
+            )
+            connection.commit()
+            return cursor.rowcount > 0
+        finally:
+            connection.close()
