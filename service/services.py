@@ -1,4 +1,4 @@
-from repository.dao_entity import DAOEntity
+from repository.dao_vendedor import DAOVendedor
 
 class Services:
 
