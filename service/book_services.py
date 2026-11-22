@@ -61,3 +61,6 @@ class BookServices:
 
     def make_available(self, book_id):
         return self._change_availability(book_id, True)
+    
+    def make_unavailable(self, book_id):
+        return self._change_availability(book_id, False)
