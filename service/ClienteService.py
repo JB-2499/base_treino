@@ -49,3 +49,9 @@ class ClienteService:
         self.repository.set_ativo(cliente_id, False)
         cliente.ativo = False
         return cliente
+    
+    def reativar(self, cliente_id):
+        cliente = self.buscar_por_id(cliente_id)
+        self.repository.set_ativo(cliente_id, True)
+        cliente.ativo = True
+        return cliente
