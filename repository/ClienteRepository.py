@@ -65,4 +65,17 @@ class ClienteRepository:
         finally:
             connection.close()
             
+    def delete(self, cliente_id):
+        connection = get_connection()
+        
+        try:
+            cursor = connection.execute(
+                "DELETE FROM cliente WHERE id = ?",
+                (cliente_id,),
+            )
+            connection.commit()
+            return cursor.rowcount > 0
+        finally:
+            connection.close()
+            
             
