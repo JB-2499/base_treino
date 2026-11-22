@@ -26,3 +26,15 @@ class ClienteService:
         if cliente is None:
             raise LookupError("Cliente não encontrado.")
         return cliente
+    
+    def atualizar(self, cliente_id, nome, cpf=None, email=None):
+        if nome is None or nome.strip() == "":
+            raise ValueError("O nome é obrigatório e não pode conter apenas espaços.")
+        cliente = self.buscar_por_id(cliente_id)
+        
+        cliente.nome = nome.strip()
+        cliente.cpf = cpf.strip() if cpf and cpf.strip() else None
+        cliente.email = email.strip() if email and email.strip() else None
+        
+        self.repository.update(cliente)
+        return cliente
