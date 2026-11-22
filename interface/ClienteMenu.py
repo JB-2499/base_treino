@@ -10,6 +10,7 @@ class ClienteMenu:
             print("1 - Cadastrar cliente")
             print("2 - Listar clientes")
             print("3 - Consultar cliente por ID")
+            print("4 - Atualizar cliente")
             print("0 - Voltar")
             
             opcao = input("Escolha uma opção: ").strip()
@@ -20,6 +21,8 @@ class ClienteMenu:
                 self.listar()
             elif opcao == "3":
                 self.consultar()
+            elif opcao == "4":
+                self.atualizar()
             elif opcao == "0":
                 break
             else:
@@ -59,4 +62,32 @@ class ClienteMenu:
             print(cliente)
         except LookupError as erro:
             print(erro)
+            
+    def atualizar(self):
+        print("\n--- Atualizar cliente ---")
+        
+        try:
+            cliente_id = int(input("Id do cliente: "))
+        except ValueError:
+            print("ID inválido. Digite um número")
+            return
+        try:
+            atual = self.service.buscar_por_id(cliente_id)
+        except LookupError as erro:
+            print(erro)
+            return
+        
+        print(f"Dados atuais: {atual}")
+        nome = input("Novo nome: ")
+        cpf = input("Novo cpf (opcional): ")
+        email = input("Novo email (opcional): ")
+        
+        try:
+            cliente = self.service.atualizar(cliente_id, nome, cpf, email)
+            print("Cliente atualizado com sucesso!")
+            print(cliente)
+        except ValueError as erro:
+            print(f"Erro: {erro}")
+        except LookupError as erro:
+             print(erro)
             
