@@ -44,3 +44,9 @@ class BookServices:
         book.title = title
         book.synopsis = synopsis
         return self.repository.update(book)
+   
+     def delete(self, book_id):
+        if self.repository.find_by_id(book_id) is None:
+            return False
+        return self.repository.delete(book_id)   
+    

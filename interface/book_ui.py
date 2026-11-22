@@ -86,3 +86,21 @@ class BookUI:
                 print("Livro não encontrado.")
         except ValueError as error:
             print(f"Erro: {error}")
+            
+    def delete_book(self):
+        book_id = self._read_id()
+        if book_id is None:
+            return
+
+        book = self.services.get(book_id)
+        if book is None:
+            print("Livro não encontrado.")
+            return
+
+        confirmacao = input(f"Deseja realmente excluir '{book.title}'? (s/n): ").strip().lower()
+
+        if confirmacao == "s":
+            self.services.delete(book_id)
+            print("Livro excluído com sucesso.")
+        else:
+            print("Exclusão cancelada.")

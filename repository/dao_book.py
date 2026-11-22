@@ -51,3 +51,12 @@ class DAOBook:
             return cursor.rowcount > 0
         finally:
             connection.close()
+            
+    def delete(self, book_id):
+        connection = get_connection()
+        try:
+            cursor = connection.execute("DELETE FROM books WHERE id = ?", (book_id,))
+            connection.commit()
+            return cursor.rowcount > 0
+        finally:
+            connection.close()            
