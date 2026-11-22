@@ -11,6 +11,15 @@ def install():
         active INTEGER NOT NULL DEFAULT 0,
         observation TEXT NOT NULL DEFAULT '')
         """)
+        
+        connection.execute("""
+        CREATE TABLE IF NOT EXISTS cliente(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nome TEXT NOT NULL,
+        cpf TEXT,
+        email TEXT,
+        ativo INTEGER NOT NULL DEFAULT 1)
+        """)
 
         total = connection.execute("SELECT COUNT(*) FROM vendedores").fetchone()[0]
         
