@@ -4,10 +4,21 @@ def install():
     connection = get_connection()
 
     try:
-        # Criar tabela no banco de dados
-        connection.execute("""""")
+        connection.execute("""
+        CREATE TABLE IF NOT EXISTS vendedores (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        active INTEGER NOT NULL DEFAULT 0,
+        observation TEXT NOT NULL DEFAULT '')
+        """)
 
-        # Inserir dados iniciais (OBRIGATÓRIO!!!!)
+        total = connection.execute("SELECT COUNT(*) FROM vendedores").fetchone()[0]
+        
+        if total == 0:
+            connection.execute(
+                "INSERT INTO vendedores (name, active, observation) VALUES (?, ?, ?)",
+                ("João", 1, "Vendedor experiente")
+            )
         
         connection.commit()
 
