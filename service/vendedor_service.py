@@ -56,12 +56,3 @@ class Services:
 
         vendedor.active = True
         self.repository.update(vendedor)
-
-    def set_ativo(self, id, ativo):
-        vendedor = self.repository.find_by_id(id)
-
-        if vendedor is None:
-            raise ValueError("Vendedor não encontrado.")
-
-        vendedor.active = ativo
-        self.repository.update(vendedor)

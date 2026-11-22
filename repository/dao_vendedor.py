@@ -81,3 +81,16 @@ class DAOVendedor:
 
         finally:
             connection.close()
+
+    def set_ativo(self, id, ativo):
+        connection = get_connection()
+
+        try:
+            cursor = connection.execute("""
+                UPDATE vendedores SET active = ? WHERE id = ?
+            """, (ativo, id))
+            connection.commit()
+            return cursor.rowcount > 0
+        
+        finally:
+            connection.close()
