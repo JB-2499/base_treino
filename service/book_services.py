@@ -28,3 +28,6 @@ class BookServices:
     
     def list(self):
         return self.repository.find_all()
+    
+    def get(self, book_id):
+        return self.repository.find_by_id(book_id)

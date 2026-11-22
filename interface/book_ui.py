@@ -53,3 +53,22 @@ class BookUI:
         for book in books:
             self._print_book(book)
         print("-" * 40)
+        
+    def _read_id(self):
+        value = input("Informe o ID do livro: ").strip()
+        if not value.isdigit():
+            print("ID inválido. Informe um número inteiro.")
+            return None
+        return int(value)
+
+    def get_book(self):
+        book_id = self._read_id()
+        if book_id is None:
+            return
+
+        book = self.services.get(book_id)
+        if book is None:
+            print("Livro não encontrado.")
+            return
+
+        self._print_book(book)

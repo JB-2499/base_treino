@@ -30,4 +30,14 @@ class DAOBook:
         finally:
             connection.close()
             
-    
+    def find_by_id(self, book_id):
+        connection = get_connection()
+        try:
+            row = connection.execute(
+                "SELECT id, title, synopsis, available FROM books WHERE id = ?",
+                (book_id,),
+            ).fetchone()
+            return self._to_book(row) if row else None
+        finally:
+            connection.close()
+            
