@@ -43,3 +43,9 @@ class ClienteService:
         self.buscar_por_id(cliente_id)
         
         return self.repository.delete(cliente_id)
+    
+    def desativar(self, cliente_id):
+        cliente = self.buscar_por_id(cliente_id)
+        self.repository.set_ativo(cliente_id, False)
+        cliente.ativo = False
+        return cliente
