@@ -25,3 +25,6 @@ class BookServices:
         book = Book(title=title, synopsis=synopsis, available=False)
         book.id = self.repository.create(book)
         return book
+    
+    def list(self):
+        return self.repository.find_all()

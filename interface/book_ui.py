@@ -34,3 +34,22 @@ class BookUI:
             print(f"Livro cadastrado com sucesso! ID: {book.id}")
         except ValueError as error:
             print(f"Erro: {error}")
+            
+            
+    def _print_book(self, book):
+        print("-" * 40)
+        print(f"ID: {book.id}")
+        print(f"Título: {book.title}")
+        print(f"Sinopse: {book.synopsis or '(sem sinopse)'}")
+        print(f"Situação: {book.status}")
+
+    def list_books(self):
+        books = self.services.list()
+
+        if not books:
+            print("Nenhum livro cadastrado.")
+            return
+
+        for book in books:
+            self._print_book(book)
+        print("-" * 40)

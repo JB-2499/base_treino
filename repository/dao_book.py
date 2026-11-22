@@ -19,3 +19,15 @@ class DAOBook:
             return cursor.lastrowid
         finally:
             connection.close()
+            
+    def find_all(self):
+        connection = get_connection()
+        try:
+            rows = connection.execute(
+                "SELECT id, title, synopsis, available FROM books ORDER BY id"
+            ).fetchall()
+            return [self._to_book(row) for row in rows]
+        finally:
+            connection.close()
+            
+    
