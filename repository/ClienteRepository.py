@@ -52,4 +52,17 @@ class ClienteRepository:
         finally:
             connection.close()
             
+    def update(self, cliente):
+        connection = get_connection()
+        
+        try:
+            cursor = connection.execute(
+                "UPDATE cliente SET nome = ?, cpf = ?, email = ? WHERE id = ?",
+                (cliente.nome, cliente.cpf, cliente.email, cliente.id),
+            )
+            connection.commit()
+            return cursor.rowcount > 0
+        finally:
+            connection.close()
+            
             
