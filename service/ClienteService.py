@@ -38,3 +38,8 @@ class ClienteService:
         
         self.repository.update(cliente)
         return cliente
+    
+    def excluir(self, cliente_id):
+        self.buscar_por_id(cliente_id)
+        
+        return self.repository.delete(cliente_id)
