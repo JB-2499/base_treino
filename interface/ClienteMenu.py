@@ -13,6 +13,7 @@ class ClienteMenu:
             print("4 - Atualizar cliente")
             print("5 - Excluir cliente")
             print("6 - Desativar cliente")
+            print("7 - Reativar cliente")
             print("0 - Voltar")
             
             opcao = input("Escolha uma opção: ").strip()
@@ -29,6 +30,8 @@ class ClienteMenu:
                 self.excluir()
             elif opcao == "6":
                 self.desativar()
+            elif opcao == "7":
+                self.reativar()
             elif opcao == "0":
                 break
             else:
@@ -137,6 +140,22 @@ class ClienteMenu:
         try:
             cliente = self.service.desativar(cliente_id)
             print("Cliente desativado com sucesso")
+            print(cliente)
+        except LookupError as erro:
+            print(erro)
+            
+    def reativar(self):
+        print("\n--- Reativar cliente ---")
+        
+        try:
+            cliente_id = int(input("Id do cliente: "))
+        except ValueError:
+            print("ID inválido. Digite um número")
+            return
+        
+        try:
+            cliente = self.service.reativar(cliente_id)
+            print("Cliente reativado com sucesso")
             print(cliente)
         except LookupError as erro:
             print(erro)
