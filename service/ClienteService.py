@@ -17,3 +17,12 @@ class ClienteService:
         )
         
         return self.repository.create(cliente)
+    
+    def listar(self):
+        return self.repository.find_all()
+    
+    def buscar_por_id(self, cliente_id):
+        cliente = self.repository.find_by_id(cliente_id)
+        if cliente is None:
+            raise LookupError("Cliente não encontrado.")
+        return cliente
