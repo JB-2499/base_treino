@@ -1,4 +1,5 @@
 from database.connection import get_connection
+from entities.Cliente import Cliente
 
 class ClienteRepository:
     def create(self, cliente):
@@ -33,6 +34,20 @@ class ClienteRepository:
                 "SELECT id, nome, cpf, email, ativo FROM cliente ORDER BY id"
             )
             return [self._linha_para_cliente(linha) for linha in cursor.fetchall()]
+        
+        finally:
+            connection.close()
+            
+    def find_by_id(self,cliente_id):
+        connection = get_connection()
+        
+        try:
+            cursor = connection.execute(
+                "SELECT id, nome, cpf, email, ativo FROM cliente WHERE id = ?",
+                (cliente_id,),
+            )
+            linha = cursor.fetchone()
+            return self._linha_para_cliente(linha) if linha else None
         
         finally:
             connection.close()
