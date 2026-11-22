@@ -1,15 +1,17 @@
 from install import install
-from interface.gui import UI
-from service.services import Services
-from repository.dao_entity import DAOEntity
+from interface.vendedor_gui import UI
+from service.vendedor_service import Services
+from repository.dao_vendedor import DAOVendedor
+
 
 def main():
     install()
 
-    repository = DAOEntity()
+    repository = DAOVendedor()
     services = Services(repository)
-    UI(services).show_principal_menu()
 
+    ui = UI(services)
+    ui.show_principal_menu()
 
 
 if __name__ == "__main__":
