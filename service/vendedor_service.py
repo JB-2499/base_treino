@@ -38,3 +38,21 @@ class Services:
             raise ValueError("Vendedor não encontrado.")
         
         self.repository.delete(id)
+
+    def deactivate(self, id):
+        vendedor = self.repository.find_by_id(id)
+
+        if vendedor is None:
+            raise ValueError("Vendedor não encontrado.")
+
+        vendedor.active = False
+        self.repository.update(vendedor)
+
+    def activate(self, id):
+        vendedor = self.repository.find_by_id(id)
+
+        if vendedor is None:
+            raise ValueError("Vendedor não encontrado.")
+
+        vendedor.active = True
+        self.repository.update(vendedor)
