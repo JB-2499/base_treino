@@ -71,4 +71,18 @@ class BookUI:
             print("Livro não encontrado.")
             return
 
-        self._print_book(book)
+    def update_book(self):
+        book_id = self._read_id()
+        if book_id is None:
+            return
+
+        title = input("Novo título: ")
+        synopsis = input("Nova sinopse (opcional): ")
+
+        try:
+            if self.services.update(book_id, title, synopsis):
+                print("Livro atualizado com sucesso!")
+            else:
+                print("Livro não encontrado.")
+        except ValueError as error:
+            print(f"Erro: {error}")

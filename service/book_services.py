@@ -31,3 +31,16 @@ class BookServices:
     
     def get(self, book_id):
         return self.repository.find_by_id(book_id)
+    
+    
+    def update(self, book_id, title, synopsis=None):
+        title = self._validate_title(title)
+        synopsis = self._clean_synopsis(synopsis)
+
+        book = self.repository.find_by_id(book_id)
+        if book is None:
+            return False
+
+        book.title = title
+        book.synopsis = synopsis
+        return self.repository.update(book)

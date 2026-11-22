@@ -40,4 +40,14 @@ class DAOBook:
             return self._to_book(row) if row else None
         finally:
             connection.close()
-            
+    def update(self, book):
+        connection = get_connection()
+        try:
+            cursor = connection.execute(
+                "UPDATE books SET title = ?, synopsis = ? WHERE id = ?",
+                (book.title, book.synopsis, book.id),
+            )
+            connection.commit()
+            return cursor.rowcount > 0
+        finally:
+            connection.close()
