@@ -1,4 +1,4 @@
-from service.services import Services
+from service.vendedor_service import Services
 
 class UI:
 
