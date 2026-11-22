@@ -9,6 +9,7 @@ class ClienteMenu:
             print("\n=== MENU CLIENTES ===")
             print("1 - Cadastrar cliente")
             print("2 - Listar clientes")
+            print("3 - Consultar cliente por ID")
             print("0 - Voltar")
             
             opcao = input("Escolha uma opção: ").strip()
@@ -17,6 +18,8 @@ class ClienteMenu:
                 self.cadastrar()
             elif opcao == "2":
                 self.listar()
+            elif opcao == "3":
+                self.consultar()
             elif opcao == "0":
                 break
             else:
@@ -43,4 +46,17 @@ class ClienteMenu:
             return
         for cliente in clientes:
             print(cliente)
+            
+    def consultar(self):
+        print("\n--- Consultar cliente ---")
+        try:
+            cliente_id = int(input("Id do cliente: "))
+        except ValueError:
+            print("ID inválido. Digite o número")
+            return
+        try:
+            cliente = self.service.buscar_por_id(cliente_id)
+            print(cliente)
+        except LookupError as erro:
+            print(erro)
             
